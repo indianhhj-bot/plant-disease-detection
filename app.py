@@ -1,18 +1,29 @@
 
+import json
+import html
+import numpy as np
+import streamlit as st
+import tensorflow as tf
+from PIL import Image, ImageOps
+
+st.set_page_config(
+    page_title="PlantCare AI",
+    page_icon="🌿",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 st.markdown("""
 <style>
-/* Main page */
 .stApp {
     background: #f5faf5;
     color: #203b2b;
 }
 
-/* Header */
 [data-testid="stHeader"] {
     background: #f5faf5;
 }
 
-/* Sidebar: dark text on light green */
 [data-testid="stSidebar"] {
     background: #e5f1e6;
 }
@@ -21,7 +32,6 @@ st.markdown("""
     color: #203b2b !important;
 }
 
-/* Hero banner */
 .hero {
     padding: 30px 32px;
     border-radius: 20px;
@@ -40,31 +50,6 @@ st.markdown("""
     font-size: 1.05rem;
 }
 
-/* Main headings and text */
-.stApp h1,
-.stApp h2,
-.stApp h3,
-.stApp p,
-.stApp label,
-.stApp [data-testid="stMarkdownContainer"] {
-    color: #203b2b;
-}
-
-/* Upload widget: readable label and border */
-[data-testid="stFileUploader"] {
-    background: #ffffff;
-    border: 1px solid #c9ddcc;
-    border-radius: 12px;
-    padding: 12px;
-}
-
-[data-testid="stFileUploader"] label,
-[data-testid="stFileUploader"] section,
-[data-testid="stFileUploader"] small {
-    color: #203b2b !important;
-}
-
-/* Information cards */
 .info-card {
     padding: 20px;
     background: #edf7ee;
@@ -77,7 +62,6 @@ st.markdown("""
     color: #205b39 !important;
 }
 
-/* Buttons */
 div.stButton > button {
     background: #237547;
     color: #ffffff !important;
@@ -92,7 +76,19 @@ div.stButton > button:hover {
     color: #ffffff !important;
 }
 
-/* Metrics */
+[data-testid="stFileUploader"] {
+    background: #ffffff;
+    border: 1px solid #c9ddcc;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+[data-testid="stFileUploader"] label,
+[data-testid="stFileUploader"] section,
+[data-testid="stFileUploader"] small {
+    color: #203b2b !important;
+}
+
 div[data-testid="stMetric"] {
     background: #ffffff;
     padding: 16px;
@@ -100,13 +96,11 @@ div[data-testid="stMetric"] {
     border-radius: 14px;
 }
 
-/* Footer */
 .small-note {
     color: #506b58 !important;
 }
 
-#MainMenu,
-footer {
+#MainMenu, footer {
     visibility: hidden;
 }
 </style>
