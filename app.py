@@ -12,9 +12,9 @@ st.set_page_config(
 @st.cache_resource
 def load_model():
     model = tf.keras.models.load_model(
-        "/content/plant_disease_model.keras"
+        "plant_disease_model.keras"
     )
-    with open("/content/class_names.json") as f:
+    with open("class_names.json") as f:
         names = json.load(f)
     return model, names
 
